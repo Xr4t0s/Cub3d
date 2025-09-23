@@ -7,6 +7,7 @@
 		"player.h": "c",
 		"raycast.h": "c",
 		"libft.h": "c",
-		"movements.h": "c"
+		"movements.h": "c",
+		"random": "c"
 	}
 }

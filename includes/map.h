@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/22 22:15:55 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:20:27 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ typedef struct s_map
 // PARSING
 int		parse_file(t_data *d, char *filename);
 char	*remove_spaces(char *line);
-int	normalize_map(t_data *d);
+int		normalize_map(t_data *d);
 void	handle_no_so(t_data *d, char *trimed, int target);
 void	handle_we_ea(t_data *d, char *trimed, int target);
+int		fulfill_fc(char **param, t_data *d);
+// int		check_fc(int **fc);
 
 // CHECK FUNCTIONS
 int	check_data(t_data *d, char *filename);

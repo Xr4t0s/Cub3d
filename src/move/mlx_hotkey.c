@@ -6,137 +6,111 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 23:17:57 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/22 21:26:15 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:42:58 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-# include "raycast.h"
+#include "raycast.h"
 
-
-int check_angle(t_data *data)
+int	go_up(t_data *d)
 {
-	double x = data->player.xP;
-	double y = data->player.yP;
-	
-	double angle = data->player.angle;
-	if (angle >= 0 && angle <= 1.57)
+	t_tmpvar	tmp;
+
+	tmp.ny = sin(d->player.angle) * 3;
+	tmp.yP1 = d->player.yP + tmp.ny;
+	tmp.nx = cos(d->player.angle) * 3;
+	tmp.xP1 = d->player.xP + tmp.nx;
+	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	if (!check_angle(d))
+		return (0);
+	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		if (data->map.map[(int)y / data->scale][(int)(x + 1) / data->scale] == '1' && data->map.map[(int)(y + 1) / data->scale][(int)x / data->scale] == '1')
-			return (0);
+		d->player.yP += sin(d->player.angle) * d->player.move_speed;
+		d->player.y = d->player.yP / d->scale;
 	}
-	else if (angle >= 1.57 && angle <= 3.14)
+	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		if (data->map.map[(int)y / data->scale][(int)(x - 1) / data->scale] == '1' && data->map.map[(int)(y + 1) / data->scale][(int)x / data->scale] == '1')
-			return (0);
-	}
-	else if (angle >= 3.14 && angle <= 4.71)
-	{
-		if (data->map.map[(int)y / data->scale][(int)(x - 1) / data->scale] == '1' && data->map.map[(int)(y - 1) / data->scale][(int)x / data->scale] == '1')
-			return (0);
-	}
-	else if (angle >= 4.71 && angle <= 6.28)
-	{
-		if (data->map.map[(int)y / data->scale][(int)(x + 1) / data->scale] == '1' && data->map.map[(int)(y - 1) / data->scale][(int)x / data->scale] == '1')
-			return (0);
+		d->player.xP += cos(d->player.angle) * d->player.move_speed;
+		d->player.x = d->player.xP / d->scale;
 	}
 	return (1);
 }
 
-int	go_up(t_data *data)
+int	go_down(t_data *d)
 {
-	double ny = sin(data->player.angle) * 3;
-	int yP1 = data->player.yP + ny;
-	double nx = cos(data->player.angle) * 3;
-	int xP1 = data->player.xP + nx;
-	if (!check_angle(data))
+	t_tmpvar	tmp;
+
+	tmp.ny = sin(d->player.angle) * 3;
+	tmp.yP1 = d->player.yP - tmp.ny;
+	tmp.nx = cos(d->player.angle) * 3;
+	tmp.xP1 = d->player.xP - tmp.nx;
+	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	if (!check_angle(d))
 		return (0);
-	if (data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != '1' && data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != 'D')
+	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		data->player.yP += sin(data->player.angle) * data->player.move_speed;
-		data->player.y = data->player.yP / data->scale;
+		d->player.yP -= sin(d->player.angle) * d->player.move_speed;
+		d->player.y = d->player.yP / d->scale;
 	}
-	if (data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != '1' && data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != 'D')
+	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		data->player.xP += cos(data->player.angle) * data->player.move_speed;
-		data->player.x = data->player.xP / data->scale;
+		d->player.xP -= cos(d->player.angle) * d->player.move_speed;
+		d->player.x = d->player.xP / d->scale;
 	}
 	return (1);
 }
 
-int	go_down(t_data *data)
+int	go_left(t_data *d)
 {
-	double ny = sin(data->player.angle) * 3;
-	int yP1 = data->player.yP - ny;
-	double nx = cos(data->player.angle) * 3;
-	int xP1 = data->player.xP - nx;
-	if (!check_angle(data))
+	t_tmpvar	tmp;
+
+	tmp.a = d->player.angle;
+	tmp.ny = -cos(tmp.a) * 3.0;
+	tmp.yP1 = d->player.yP + tmp.ny;
+	tmp.nx = sin(tmp.a) * 3.0;
+	tmp.xP1 = d->player.xP + tmp.nx;
+	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	if (!check_angle(d))
 		return (0);
-	if (data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != '1' && data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != 'D')
+	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		data->player.yP -= sin(data->player.angle) * data->player.move_speed;
-		data->player.y = data->player.yP / data->scale;
+		d->player.yP += -cos(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.y = d->player.yP / d->scale;
 	}
-	if (data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != '1' && data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != 'D')
+	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		data->player.xP -= cos(data->player.angle) * data->player.move_speed;
-		data->player.x = data->player.xP / data->scale;
-	}
-	return (1);
-}	
-
-int	go_left(t_data *data)
-{
-	double a = data->player.angle;
-	/* vecteur strafe gauche = (sin(a), -cos(a)) */
-	double ny = -cos(a) * 3.0;              // look-ahead 3 px
-	int    yP1 = data->player.yP + ny;
-	double nx =  sin(a) * 3.0;
-	int    xP1 = data->player.xP + nx;
-
-	if (!check_angle(data))
-		return (0);
-
-	/* slide sur Y puis sur X, comme go_up */
-	if (data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != '1'
-	 && data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != 'D')
-	{
-		data->player.yP += -cos(a) * (data->player.move_speed / 1.5);
-		data->player.y = data->player.yP / data->scale;
-	}
-	if (data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != '1'
-	 && data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != 'D')
-	{
-		data->player.xP += sin(a) * (data->player.move_speed / 1.5);
-		data->player.x = data->player.xP / data->scale;
+		d->player.xP += sin(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.x = d->player.xP / d->scale;
 	}
 	return (1);
 }
 
-int	go_right(t_data *data)
+int	go_right(t_data *d)
 {
-	double a = data->player.angle;
-	/* vecteur strafe gauche = (sin(a), -cos(a)) */
-	double ny = cos(a) * 3.0;              // look-ahead 3 px
-	int    yP1 = data->player.yP + ny;
-	double nx =  -sin(a) * 3.0;
-	int    xP1 = data->player.xP + nx;
+	t_tmpvar	tmp;
 
-	if (!check_angle(data))
+	tmp.a = d->player.angle;
+	tmp.ny = cos(tmp.a) * 3.0;
+	tmp.yP1 = d->player.yP + tmp.ny;
+	tmp.nx = -sin(tmp.a) * 3.0;
+	tmp.xP1 = d->player.xP + tmp.nx;
+	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	if (!check_angle(d))
 		return (0);
-
-	/* slide sur Y puis sur X, comme go_up */
-	if (data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != '1'
-	 && data->map.map[yP1 / data->scale][(int)data->player.xP / data->scale] != 'D')
+	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		data->player.yP += cos(a) * (data->player.move_speed / 1.5);
-		data->player.y = data->player.yP / data->scale;
+		d->player.yP += cos(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.y = d->player.yP / d->scale;
 	}
-	if (data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != '1'
-		&& data->map.map[(int)data->player.yP / data->scale][xP1 / data->scale] != 'D')
+	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		data->player.xP += -sin(a) * (data->player.move_speed / 1.5);
-		data->player.x = data->player.xP / data->scale;
+		d->player.xP += -sin(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.x = d->player.xP / d->scale;
 	}
 	return (1);
 }
@@ -159,7 +133,6 @@ int	view_right(t_data *data)
 
 int	handle_keypress(int keycode, t_data *data)
 {
-	// printf("%d\n", data->move.w);
 	if (data->move.w == 1)
 		go_up(data);
 	if (data->move.s == 1)
@@ -172,13 +145,12 @@ int	handle_keypress(int keycode, t_data *data)
 		view_right(data);
 	if (data->move.l == 1)
 		view_left(data);
-		
 	return (1);
 }
 
 int	movements(t_data *data)
 {
-	mlx_hook(data->mlx.win, 2, 1L<<0, key_press, data);
-	mlx_hook(data->mlx.win, 3, 1L<<1, key_release, data);
+	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, data);
+	mlx_hook(data->mlx.win, 3, 1L << 1, key_release, data);
 	return (1);
 }

@@ -6,23 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 00:52:48 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/22 22:50:11 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:15:53 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
-
-static void	free_textures(t_data *d)
-{
-	// if (d->minimap.player)
-	// 	mlx_destroy_image((*d).mlx.mlx, (*d).minimap.player);
-	// if (d->minimap.bg)
-	// 	mlx_destroy_image((*d).mlx.mlx, (*d).minimap.bg);
-	// if (d->minimap.bg4)
-	// 	mlx_destroy_image((*d).mlx.mlx, (*d).minimap.bg4);
-	// if (d->minimap.wall)
-	// 	mlx_destroy_image((*d).mlx.mlx, (*d).minimap.wall);
-}
 
 static void	free_directions(t_data *d)
 {
@@ -41,7 +29,6 @@ void	free_all(t_data *d, int x)
 	if (d->map.map)
 		ft_free_split(d->map.map);
 	free_directions(d);
-	free_textures(d);
 	if (x == 1)
 	{
 		if (d->mlx.mlx)

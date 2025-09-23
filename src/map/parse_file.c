@@ -6,13 +6,13 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/21 04:17:40 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:20:20 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void	parse_param_utils(t_data *d, char **fc, char *trimed, char **param)
+static void	parse_param_utils(t_data *d, char *trimed, char **param)
 {
 	if (!ft_strncmp(param[0], "NO", 2))
 		handle_no_so(d, trimed, 1);
@@ -22,22 +22,7 @@ static void	parse_param_utils(t_data *d, char **fc, char *trimed, char **param)
 		handle_we_ea(d, trimed, 1);
 	else if (!ft_strncmp(param[0], "EA", 2))
 		handle_we_ea(d, trimed, 2);
-	else if (!ft_strncmp(param[0], "F", 1))
-	{
-		fc = ft_split(param[1], ',');
-		d->map.textures.fc[0][0] = ft_atoi(fc[0]);
-		d->map.textures.fc[0][1] = ft_atoi(fc[1]);
-		d->map.textures.fc[0][2] = ft_atoi(fc[2]);
-	}
-	else if (!ft_strncmp(param[0], "C", 1))
-	{
-		fc = ft_split(param[1], ',');
-		d->map.textures.fc[1][0] = ft_atoi(fc[0]);
-		d->map.textures.fc[1][1] = ft_atoi(fc[1]);
-		d->map.textures.fc[1][2] = ft_atoi(fc[2]);
-	}
-	if (fc)
-		ft_free_split(fc);
+	fulfill_fc(param, d);
 }
 
 static void	parse_param(t_data *d, char *line)
@@ -56,7 +41,7 @@ static void	parse_param(t_data *d, char *line)
 		return ;
 	if (param[1])
 		trimed = remove_spaces(param[1]);
-	parse_param_utils(d, fc, trimed, param);
+	parse_param_utils(d, trimed, param);
 	if (param)
 		ft_free_split(param);
 	if (trimed)

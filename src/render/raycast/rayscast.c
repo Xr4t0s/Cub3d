@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 00:17:11 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/22 23:46:19 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:54:53 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,6 @@ int	render(void *param)
 		// Couleurs (ARGB 0x00RRGGBB ici, selon ton mlx)
 		unsigned int ceil_col  = rgb24(data->map.textures.fc[0]); // plafond
 		unsigned int floor_col = rgb24(data->map.textures.fc[1]); // sol
-		printf("%u %u\n", ceil_col, floor_col);
 
 		// Couleur du mur selon la face frappée (ombrage simple)
 		t_direction *tex = NULL;

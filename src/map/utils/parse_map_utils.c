@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:04:33 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/22 22:02:12 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:49:31 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	establish_map_size(t_data *d)
 	int		i;
 	int		j;
 	int		max_width;
-	
+
 	i = 0;
 	j = 0;
 	max_width = 0;
@@ -52,7 +52,7 @@ static void	establish_map_size(t_data *d)
 		i++;
 	}
 	d->map.height = i;
-	d->map.width = max_width;	
+	d->map.width = max_width;
 }
 
 int	normalize_map(t_data *d)
@@ -66,7 +66,7 @@ int	normalize_map(t_data *d)
 	count = 0;
 	copy = malloc(sizeof(char *) * (d->map.height + 1));
 	if (!copy)
-		return (0);	
+		return (0);
 	i = 0;
 	while (d->map.map[i])
 	{
@@ -83,11 +83,12 @@ int	normalize_map(t_data *d)
 				copy[i][j] = '.';
 			else
 				copy[i][j] = d->map.map[i][j];
-			if (d->map.map[i][j] == 'S' || d->map.map[i][j] == 'N' || d->map.map[i][j] == 'E' || d->map.map[i][j] == 'W')
+			if (d->map.map[i][j] == 'S' || d->map.map[i][j] == 'N'
+				|| d->map.map[i][j] == 'E' || d->map.map[i][j] == 'W')
 			{
 				count++;
 				if (count > 1)
-					return(copy[i + 1] = NULL, ft_free_split(copy),  0);
+					return (copy[i + 1] = NULL, ft_free_split(copy), 0);
 				d->player.x = j;
 				d->player.xP = d->player.x * d->scale + 4;
 				d->player.y = i;
@@ -118,10 +119,13 @@ int	normalize_map(t_data *d)
 
 void	handle_no_so(t_data *d, char *trimed, int target)
 {
-	t_direction *no = &d->map.textures.no;
-	t_direction *so = &d->map.textures.so;
-	
-	int fd = open(trimed, O_RDONLY);
+	t_direction	*no;
+	t_direction	*so;
+	int			fd;
+
+	no = &d->map.textures.no;
+	so = &d->map.textures.so;
+	fd = open(trimed, O_RDONLY);
 	if (fd == -1)
 		return ;
 	close(fd);
@@ -132,7 +136,8 @@ void	handle_no_so(t_data *d, char *trimed, int target)
 				trimed,
 				&no->width,
 				&no->height);
-		no->addr = mlx_get_data_addr(no->img, &no->bpp, &no->line_len, &no->endian);
+		no->addr = mlx_get_data_addr(no->img, &no->bpp,
+				&no->line_len, &no->endian);
 	}
 	else
 	{
@@ -141,15 +146,20 @@ void	handle_no_so(t_data *d, char *trimed, int target)
 				trimed,
 				&so->width,
 				&so->height);
-		so->addr = mlx_get_data_addr(so->img, &so->bpp, &so->line_len, &so->endian);
+		so->addr = mlx_get_data_addr(so->img, &so->bpp,
+				&so->line_len, &so->endian);
 	}
 }
 
 void	handle_we_ea(t_data *d, char *trimed, int target)
 {
-	t_direction *we = &d->map.textures.we;
-	t_direction *ea = &d->map.textures.ea;
-	int fd = open(trimed, O_RDONLY);
+	t_direction	*we;
+	t_direction	*ea;
+	int			fd;
+
+	we = &d->map.textures.we;
+	ea = &d->map.textures.ea;
+	fd = open(trimed, O_RDONLY);
 	if (fd == -1)
 		return ;
 	close(fd);
@@ -160,7 +170,8 @@ void	handle_we_ea(t_data *d, char *trimed, int target)
 				trimed,
 				&we->width,
 				&we->height);
-		we->addr = mlx_get_data_addr(we->img, &we->bpp, &we->line_len, &we->endian);
+		we->addr = mlx_get_data_addr(we->img, &we->bpp,
+				&we->line_len, &we->endian);
 	}
 	else
 	{
@@ -169,7 +180,8 @@ void	handle_we_ea(t_data *d, char *trimed, int target)
 				trimed,
 				&ea->width,
 				&ea->height);
-		ea->addr = mlx_get_data_addr(ea->img, &ea->bpp, &ea->line_len, &ea->endian);
+		ea->addr = mlx_get_data_addr(ea->img, &ea->bpp,
+				&ea->line_len, &ea->endian);
 		printf("bpp = %d\n", ea->bpp);
 	}
 }
