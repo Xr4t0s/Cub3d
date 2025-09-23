@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 00:17:11 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/23 23:43:38 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/24 00:44:24 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void	check_side(t_raydata *rd, t_raycast *raycast)
 
 void	check_side2(t_raydata *rd, t_raycast *raycast, t_data *data, t_direction **tex)
 {
+	(void)tex;
 	if (rd->hit)
 		rd->dist = raycast->perpWallDist;
 	else
@@ -214,28 +215,20 @@ void	check_side2(t_raydata *rd, t_raycast *raycast, t_data *data, t_direction **
 		rd->drawEnd = data->mlx.height - 1;
 	rd->ceil_col  = rgb24(data->map.textures.fc[0]);
 	rd->floor_col = rgb24(data->map.textures.fc[1]);
-	if (raycast->side == 1)
-		*tex = &data->map.textures.ea;
-	else if (raycast->side == 2)
-		*tex = &data->map.textures.no;
-	else if (raycast->side == 3)
-		*tex = &data->map.textures.so;
-	else
-		*tex = &data->map.textures.we;
+	
 }
 
 int	render(void *param)
 {
 	t_data	*data = (t_data *)param;
 	t_raydata	rd;
+	t_direction *tex;
+	t_raycast raycast;
 
 	rd.img = NULL;
 	init_ray(&rd, data);
 	while (rd.x < data->mlx.width)
 	{
-		t_direction *tex;
-		t_raycast raycast;
-		
 		tex = NULL;
 		base_calc(&raycast, data, &rd);
 		base_calc2(&raycast);
@@ -246,9 +239,18 @@ int	render(void *param)
 			ray_check(&raycast, &rd, data);
 			ray_check2(&raycast, &rd, data);
 			ray_check3(&raycast);
+
 		}
 		check_side(&rd, &raycast);
 		check_side2(&rd, &raycast, data, &tex);
+		if (raycast.side == 1)
+			tex = &data->map.textures.ea;
+		else if (raycast.side == 2)
+			tex = &data->map.textures.no;
+		else if (raycast.side == 3)
+			tex = &data->map.textures.so;
+		else
+			tex = &data->map.textures.we;
 		if (raycast.side <= 1) // mur vertical (O/E)
 			rd.wallX = raycast.posY + rd.dist * raycast.rayDirY;
 		else                    // mur horizontal (N/S)
@@ -316,6 +318,6 @@ int	render(void *param)
 
 	// Affiche le buffer à l’écran
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, rd.img, 0, 0);
+	mlx_destroy_image(data->mlx.mlx, rd.img);
 	return (0);
 }
-
