@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 22:07:44 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 22:08:08 by nitadros         ###   ########.fr       */
+/*   Created: 2025/09/23 21:24:56 by engiacom          #+#    #+#             */
+/*   Updated: 2025/09/23 21:48:58 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+#include "raycast.h"
 
-unsigned int rgb24(int fc[3])
+void	minimap_draw_pixel(t_minivar *mini, int x, int y, t_data *data)
 {
-	return ((fc[0] & 0xFF) << 16 | ((fc[1] & 0xFF) << 8) | (fc[2] & 0xFF));
+	char	*dst;
+
+	if (x >= 0 && x < data->mlx.width && y >= 0 && y < data->mlx.height)
+	{
+		dst = mini->addr + (y * mini->line_len + x * (mini->bpp / 8));
+		if (*(unsigned int *)dst != 0x00FFFF00)
+			*(unsigned int *)dst = mini->color;
+	}
 }

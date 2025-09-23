@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 22:07:44 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 22:08:08 by nitadros         ###   ########.fr       */
+/*   Created: 2025/09/23 20:51:52 by engiacom          #+#    #+#             */
+/*   Updated: 2025/09/23 21:45:41 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#ifndef MINIMAP_H
+# define MINIMAP_H
 
-unsigned int rgb24(int fc[3])
+# include "cube3d.h"
+
+typedef	struct s_minivar
 {
-	return ((fc[0] & 0xFF) << 16 | ((fc[1] & 0xFF) << 8) | (fc[2] & 0xFF));
-}
+	char	*addr;
+	int		x;
+	int		y;
+	int		px;
+	int		py;
+	int		color;
+	int		bpp;
+	int		line_len;
+	
+}	t_minivar;
+
+void	minimap_draw_pixel(t_minivar *mini, int x, int y, t_data *data);
+
+#endif

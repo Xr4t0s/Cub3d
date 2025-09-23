@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:56:10 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/22 23:43:29 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:00:47 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,33 @@ typedef struct s_raycast
 	int		door;
 }	t_raycast;
 
+typedef	struct s_raydata
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		x;
+	int		y;
+	int		hit;
+	float	distance_travelled;
+	double		hitX;
+	double		hitY;
+	float		finalDist;
+	double		dist;
+	int			lineHeight;
+	int 		drawStart;
+	int 		drawEnd;
+	unsigned int ceil_col;
+	unsigned int floor_col;
+	double wallX;
+	int	texX;
+	double	step;
+	double	texPos;
+}	t_raydata;
+
+
 typedef	struct s_minimap
 {
 	void	*bg;
@@ -82,7 +109,7 @@ typedef	struct s_minimap
 } t_minimap;
 
 int				movements(t_data *data);
-void			minimap(char **map, t_data *data, char *addr, int bpp, int line_len	);
+void			minimap(t_data *data, char *addr, int bpp, int line_len);
 int				render(void *param);
 unsigned int	rgb24(int fc[3]);
 

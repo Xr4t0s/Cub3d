@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:04:33 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 18:49:31 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 21:53:55 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*remove_spaces(char *line)
 	return (clean);
 }
 
-static void	establish_map_size(t_data *d)
+void	establish_map_size(t_data *d)
 {
 	int		i;
 	int		j;
@@ -55,68 +55,6 @@ static void	establish_map_size(t_data *d)
 	d->map.width = max_width;
 }
 
-int	normalize_map(t_data *d)
-{
-	int		i;
-	int		j;
-	char	**copy;
-	int		count;
-
-	establish_map_size(d);
-	count = 0;
-	copy = malloc(sizeof(char *) * (d->map.height + 1));
-	if (!copy)
-		return (0);
-	i = 0;
-	while (d->map.map[i])
-	{
-		j = 0;
-		copy[i] = malloc(sizeof(char) * (d->map.width + 1));
-		if (!copy[i])
-		{
-			ft_free_split(copy);
-			return (0);
-		}
-		while (d->map.map[i][j])
-		{
-			if (d->map.map[i][j] == ' ' || d->map.map[i][j] == '\t')
-				copy[i][j] = '.';
-			else
-				copy[i][j] = d->map.map[i][j];
-			if (d->map.map[i][j] == 'S' || d->map.map[i][j] == 'N'
-				|| d->map.map[i][j] == 'E' || d->map.map[i][j] == 'W')
-			{
-				count++;
-				if (count > 1)
-					return (copy[i + 1] = NULL, ft_free_split(copy), 0);
-				d->player.x = j;
-				d->player.xP = d->player.x * d->scale + 4;
-				d->player.y = i;
-				d->player.yP = d->player.y * d->scale + 4;
-				if (d->map.map[i][j] == 'S')
-					d->player.angle = 1.57;
-				if (d->map.map[i][j] == 'E')
-					d->player.angle = 0;
-				if (d->map.map[i][j] == 'N')
-					d->player.angle = 4.71;
-				if (d->map.map[i][j] == 'W')
-					d->player.angle = 3.14;
-			}
-			j++;
-		}
-		while (j < d->map.width)
-			copy[i][j++] = '.';
-		copy[i][j] = 0;
-		i++;
-	}
-	copy[i] = NULL;
-	if (count == 0)
-		return (ft_free_split(copy), 0);
-	ft_free_split(d->map.map);
-	d->map.map = copy;
-	return (1);
-}
-
 void	handle_no_so(t_data *d, char *trimed, int target)
 {
 	t_direction	*no;
@@ -131,21 +69,15 @@ void	handle_no_so(t_data *d, char *trimed, int target)
 	close(fd);
 	if (target == 1)
 	{
-		no->img = mlx_xpm_file_to_image(
-				d->mlx.mlx,
-				trimed,
-				&no->width,
-				&no->height);
+		no->img = mlx_xpm_file_to_image(d->mlx.mlx, trimed,
+				&no->width, &no->height);
 		no->addr = mlx_get_data_addr(no->img, &no->bpp,
 				&no->line_len, &no->endian);
 	}
 	else
 	{
-		so->img = mlx_xpm_file_to_image(
-				d->mlx.mlx,
-				trimed,
-				&so->width,
-				&so->height);
+		so->img = mlx_xpm_file_to_image(d->mlx.mlx, trimed,
+				&so->width, &so->height);
 		so->addr = mlx_get_data_addr(so->img, &so->bpp,
 				&so->line_len, &so->endian);
 	}
@@ -165,21 +97,15 @@ void	handle_we_ea(t_data *d, char *trimed, int target)
 	close(fd);
 	if (target == 1)
 	{
-		we->img = mlx_xpm_file_to_image(
-				d->mlx.mlx,
-				trimed,
-				&we->width,
-				&we->height);
+		we->img = mlx_xpm_file_to_image(d->mlx.mlx, trimed,
+				&we->width, &we->height);
 		we->addr = mlx_get_data_addr(we->img, &we->bpp,
 				&we->line_len, &we->endian);
 	}
 	else
 	{
-		ea->img = mlx_xpm_file_to_image(
-				d->mlx.mlx,
-				trimed,
-				&ea->width,
-				&ea->height);
+		ea->img = mlx_xpm_file_to_image(d->mlx.mlx, trimed,
+				&ea->width, &ea->height);
 		ea->addr = mlx_get_data_addr(ea->img, &ea->bpp,
 				&ea->line_len, &ea->endian);
 		printf("bpp = %d\n", ea->bpp);

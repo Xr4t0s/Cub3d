@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:15:14 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 17:15:56 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:31:23 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	init_mouse(t_mouse *mouse)
 
 void	init(t_data *data)
 {
-	data->mlx.width = 1080;
-	data->mlx.height = 720;
+	data->mlx.width = 2160;
+	data->mlx.height = 1440;
 	init_map(&data->map);
 	init_player(&data->player);
 	init_move(&data->move);

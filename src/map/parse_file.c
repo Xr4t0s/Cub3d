@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 16:20:20 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 21:24:37 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	parse_param(t_data *d, char *line)
 		ft_free_split(param);
 	if (trimed)
 		free(trimed);
+	if (line)
+		free(line);
 }
 
 static char	*parse_map(t_data *d, char *line, int *i)
@@ -63,41 +65,45 @@ static char	*parse_map(t_data *d, char *line, int *i)
 	return (line);
 }
 
-int	parse_file(t_data *d, char *filename)
+static int	parse_file_init(t_parsing *tmp, t_data *d, char *filename)
 {
-	int		i;
-	char	*line;
-	char	*trimed;
-
-	i = 0;
-	trimed = NULL;
+	tmp->i = 0;
+	tmp->trimed = NULL;
 	d->map.fd_file = open(filename, O_RDONLY);
 	if (d->map.fd_file == -1)
 		return (0);
-	line = get_next_line(d->map.fd_file);
-	if (!line)
+	tmp->line = get_next_line(d->map.fd_file);
+	if (!tmp->line)
 		return (0);
-	while (line)
+	tmp->ft = &ft_strncmp;
+	return (1);
+}
+
+int	parse_file(t_data *d, char *filename)
+{
+	t_parsing	t;
+
+	if (!parse_file_init(&t, d, filename))
+		return (0);
+	while (t.line)
 	{
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
-		if (!ft_strncmp(&line[i], "1", 1) || !ft_strncmp(&line[i], "0", 1))
+		while (t.line[t.i] == ' ' || t.line[t.i] == '\t')
+			t.i++;
+		if (!t.ft(&t.line[t.i], "1", 1) || !t.ft(&t.line[t.i], "0", 1))
 			break ;
-		parse_param(d, line);
-		free(line);
-		line = get_next_line(d->map.fd_file);
+		parse_param(d, t.line);
+		t.line = get_next_line(d->map.fd_file);
 	}
-	i = 0;
-	while (line && ft_strncmp(line, "\n", 1))
-		line = parse_map(d, line, &i);
-	while (line)
+	t.i = 0;
+	while (t.line && ft_strncmp(t.line, "\n", 1))
+		t.line = parse_map(d, t.line, &t.i);
+	while (t.line)
 	{
-		line = parse_map(d, line, &i);
-		if (line && ft_strncmp(line, "\n", 1))
-			return (d->map.map[i] = NULL, free(line), 0);
+		t.line = parse_map(d, t.line, &t.i);
+		if (t.line && ft_strncmp(t.line, "\n", 1))
+			return (d->map.map[t.i] = NULL, free(t.line), 0);
 	}
-	d->map.map[i] = NULL;
-	if (!normalize_map(d))
+	if (!normalize_map(d, t.i))
 		return (0);
-	return (free(line), 1);
+	return (free(t.line), 1);
 }

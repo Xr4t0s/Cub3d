@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 16:20:27 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:42:51 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 # include <fcntl.h>
 
 typedef struct s_data t_data;
+
+typedef struct s_normalize
+{
+	int		i;
+	int		j;
+	char	**copy;
+	int		count;
+}	t_normalize;
+
+typedef struct s_parsing
+{
+	int		i;
+	char	*line;
+	char	*trimed;
+	int 	(*ft)(const char *, const char *, size_t);
+}	t_parsing;
 
 typedef struct s_direction
 {
@@ -48,11 +64,11 @@ typedef struct s_map
 // PARSING
 int		parse_file(t_data *d, char *filename);
 char	*remove_spaces(char *line);
-int		normalize_map(t_data *d);
+int		normalize_map(t_data *d, int index);
 void	handle_no_so(t_data *d, char *trimed, int target);
 void	handle_we_ea(t_data *d, char *trimed, int target);
 int		fulfill_fc(char **param, t_data *d);
-// int		check_fc(int **fc);
+void	establish_map_size(t_data *d);
 
 // CHECK FUNCTIONS
 int	check_data(t_data *d, char *filename);
@@ -60,3 +76,4 @@ int	check_map_data(t_data d);
 int	check_param(t_data d);
 
 #endif
+

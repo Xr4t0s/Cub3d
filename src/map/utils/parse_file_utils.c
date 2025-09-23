@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:56:16 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 18:49:59 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/23 20:30:41 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ int	fulfill_fc(char **param, t_data *d)
 		d->map.textures.fc[1][2] = ft_atoi(fc[2]);
 		ft_free_split(fc);
 	}
+	return (1);
 }

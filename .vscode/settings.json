@@ -8,6 +8,7 @@
 		"raycast.h": "c",
 		"libft.h": "c",
 		"movements.h": "c",
-		"random": "c"
+		"random": "c",
+		"minimap.h": "c"
 	}
 }
