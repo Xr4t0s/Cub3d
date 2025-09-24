@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 18:02:45 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 21:49:57 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/24 23:29:39 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_angle(t_data *data)
 	init_angle_data(&tmp, data);
 	if (tmp.angle >= 0 && tmp.angle <= 1.57)
 	{
-		if (tmp.xtestpos == '1' && tmp.ytestpos)
+		if (tmp.xtestpos == '1' && tmp.ytestpos == '1')
 			return (0);
 	}
 	else if (tmp.angle >= 1.57 && tmp.angle <= 3.14)
@@ -44,12 +44,12 @@ int	check_angle(t_data *data)
 	}
 	else if (tmp.angle >= 3.14 && tmp.angle <= 4.71)
 	{
-		if (tmp.xtestneg == '1' && tmp.ytestneg)
+		if (tmp.xtestneg == '1' && tmp.ytestneg == '1')
 			return (0);
 	}
 	else if (tmp.angle >= 4.71 && tmp.angle <= 6.28)
 	{
-		if (tmp.xtestpos == '1' && tmp.ytestneg)
+		if (tmp.xtestpos == '1' && tmp.ytestneg == '1')
 			return (0);
 	}
 	return (1);
