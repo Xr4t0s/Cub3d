@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:16:43 by nitadros          #+#    #+#             */
-/*   Updated: 2025/06/25 09:44:24 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 00:51:19 by engiacom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "cube3d.h"
 
 typedef struct s_data	t_data;
-typedef struct s_player t_player;
+typedef struct s_player	t_player;
 typedef struct s_map	t_map;
 
 void	init(t_data *data);

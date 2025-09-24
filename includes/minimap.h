@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:51:52 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/23 21:45:41 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 00:53:43 by engiacom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cube3d.h"
 
-typedef	struct s_minivar
+typedef struct s_minivar
 {
 	char	*addr;
 	int		x;
@@ -25,7 +25,7 @@ typedef	struct s_minivar
 	int		color;
 	int		bpp;
 	int		line_len;
-	
+
 }	t_minivar;
 
 void	minimap_draw_pixel(t_minivar *mini, int x, int y, t_data *data);
