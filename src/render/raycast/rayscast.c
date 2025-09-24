@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 00:17:11 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/24 00:44:24 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/24 23:34:11 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,32 @@
 
 void	draw_line(char *addr, int x0, int y0, int x1, int y1, int color, int bpp, int line_len)
 {
-	// Algorithme de Bresenham pour tracer une ligne de (x0,y0) à (x1,y1)
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx;
-	int sy;
-	int err = dx - dy;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
 
-	// Direction du pas en X
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	err = dx - dy;
 	if (x0 < x1)
 		sx = 1;
 	else
 		sx = -1;
-
-	// Direction du pas en Y
 	if (y0 < y1)
 		sy = 1;
 	else
 		sy = -1;
-
 	while (1)
 	{
-		// Évite d’écrire hors image (test minimal)
 		if (x0 >= 0 && y0 >= 0)
 		{
 			char *pixel = addr + (y0 * line_len + x0 * (bpp / 8));
 			*(unsigned int *)pixel = color;
 		}
-		// Point d’arrivée atteint
 		if (x0 == x1 && y0 == y1)
 			break;
-
-		// Mise à jour d’erreur et déplacements
 		int e2 = 2 * err;
 		if (e2 > -dy)
 		{
@@ -129,7 +123,8 @@ void	ray_check(t_raycast *raycast, t_raydata *rd, t_data *data)
 		raycast->mapY += raycast->stepY;
 		raycast->side = 2;
 	}
-	if (data->map.map[raycast->mapY][raycast->mapX] == '1' || data->map.map[raycast->mapY][raycast->mapX] == 'D')
+	if (data->map.map[raycast->mapY][raycast->mapX] == '1'
+		|| data->map.map[raycast->mapY][raycast->mapX] == 'D')
 		rd->hit = 1;
 }
 
@@ -218,31 +213,96 @@ void	check_side2(t_raydata *rd, t_raycast *raycast, t_data *data, t_direction **
 	
 }
 
+void	init_tex_and_draw(t_raycast *raycast, t_raydata *rd, t_direction *tex, t_data *d)
+{
+	if (raycast->side <= 1)
+		rd->wallX = raycast->posY + rd->dist * raycast->rayDirY;
+	else
+		rd->wallX = raycast->posX + rd->dist * raycast->rayDirX;
+	rd->wallX -= floor(rd->wallX);
+	
+	rd->texX = (int)(rd->wallX * tex->width);
+	rd->step = (double)tex->height / (double)rd->lineHeight;
+	rd->texPos = (rd->drawStart - d->mlx.height /2.0 + rd->lineHeight / 2.0) * rd->step;
+
+	rd->y = 0;
+	while (rd->y < rd->drawStart)
+	{
+		char *p = rd->addr + (rd->y * rd->line_len + rd->x * (rd->bpp / 8));
+		*(unsigned int *)p = rd->ceil_col;
+		rd->y++;
+	}
+}
+
+void	draw_wall(t_raydata *rd, t_data *data, t_direction *tex)
+{
+	rd->y = rd->drawStart;
+	while (rd->y <= rd->drawEnd)
+	{
+		unsigned int color;
+		int texY = (int)rd->texPos;
+		
+		if (texY < 0) texY = 0;
+		if (texY >= tex->height) texY = tex->height - 1;
+		rd->texPos += rd->step;
+		char *src = tex->addr + texY * tex->line_len + rd->texX * (tex->bpp/8);
+		color = *(unsigned int*)src;
+		char *p = rd->addr + (rd->y * rd->line_len + rd->x * (rd->bpp / 8));
+		*(unsigned int *)p = color;
+		rd->y++;
+	}
+}
+
+void	draw_floor_and_put_screen(t_raydata *rd, t_raycast *raycast, t_data *data)
+{
+	rd->y = rd->drawEnd + 1;
+	while (rd->y < data->mlx.height)
+	{
+		char *p = rd->addr + (rd->y * rd->line_len + rd->x * (rd->bpp / 8));
+		*(unsigned int *)p = rd->floor_col;
+		rd->y++;
+	}
+	rd->hitX = raycast->posX + raycast->rayDirX * rd->finalDist;
+	rd->hitY = raycast->posY + raycast->rayDirY * rd->finalDist;
+	draw_line(
+		rd->addr,
+		(int)(raycast->posX * data->scale + 1.5), (int)(raycast->posY * data->scale),
+		(int)(rd->hitX * data->scale),               (int)(rd->hitY * data->scale),
+		0x00FFFF00, rd->bpp, rd->line_len
+	);
+	rd->x++;
+}
+
+void all_checks(t_raycast *raycast, t_raydata *rd, t_data *data, t_direction *tex)
+{
+	tex = NULL;
+	base_calc(raycast, data, rd);
+	base_calc2(raycast);
+	rd->hit = 0;
+	rd->distance_travelled = 0.0f;
+	while (rd->hit == 0 && rd->distance_travelled < MAX_DIST)
+	{
+		ray_check(raycast, rd, data);
+		ray_check2(raycast, rd, data);
+		ray_check3(raycast);
+
+	}
+	check_side(rd, raycast);
+	check_side2(rd, raycast, data, &tex);
+}
+
 int	render(void *param)
 {
 	t_data	*data = (t_data *)param;
 	t_raydata	rd;
 	t_direction *tex;
-	t_raycast raycast;
+	static t_raycast raycast;
 
 	rd.img = NULL;
 	init_ray(&rd, data);
 	while (rd.x < data->mlx.width)
 	{
-		tex = NULL;
-		base_calc(&raycast, data, &rd);
-		base_calc2(&raycast);
-		rd.hit = 0;
-		rd.distance_travelled = 0.0f;
-		while (rd.hit == 0 && rd.distance_travelled < MAX_DIST)
-		{
-			ray_check(&raycast, &rd, data);
-			ray_check2(&raycast, &rd, data);
-			ray_check3(&raycast);
-
-		}
-		check_side(&rd, &raycast);
-		check_side2(&rd, &raycast, data, &tex);
+		all_checks(&raycast, &rd, data, tex);
 		if (raycast.side == 1)
 			tex = &data->map.textures.ea;
 		else if (raycast.side == 2)
@@ -251,72 +311,12 @@ int	render(void *param)
 			tex = &data->map.textures.so;
 		else
 			tex = &data->map.textures.we;
-		if (raycast.side <= 1) // mur vertical (O/E)
-			rd.wallX = raycast.posY + rd.dist * raycast.rayDirY;
-		else                    // mur horizontal (N/S)
-			rd.wallX = raycast.posX + rd.dist * raycast.rayDirX;
-		rd.wallX -= floor(rd.wallX);
-		
-		rd.texX = (int)(rd.wallX * tex->width);
-		rd.step = (double)tex->height / (double)rd.lineHeight;
-		rd.texPos = (rd.drawStart - data->mlx.height /2.0 + rd.lineHeight / 2.0) * rd.step;
-
-		rd.y = 0;
-		while (rd.y < rd.drawStart)
-		{
-			char *p = rd.addr + (rd.y * rd.line_len + rd.x * (rd.bpp / 8));
-			*(unsigned int *)p = rd.ceil_col;
-			rd.y++;
-		}
-		
-		rd.y = rd.drawStart;
-		while (rd.y <= rd.drawEnd)
-		{
-			unsigned int color;
-			int texY = (int)rd.texPos;
-			
-			if (texY < 0) texY = 0;
-			if (texY >= tex->height) texY = tex->height - 1;
-			rd.texPos += rd.step;
-
-			char *src = tex->addr + texY * tex->line_len + rd.texX * (tex->bpp/8);
-    		color = *(unsigned int*)src;
-			// printf("%u\n", color);
-			
-			char *p = rd.addr + (rd.y * rd.line_len + rd.x * (rd.bpp / 8));
-			*(unsigned int *)p = color;
-			rd.y++;
-		}
-
-		// --- Remplissage sol (y : drawEnd+1 → 719)
-		rd.y = rd.drawEnd + 1;
-		while (rd.y < data->mlx.height)
-		{
-			char *p = rd.addr + (rd.y * rd.line_len + rd.x * (rd.bpp / 8));
-			*(unsigned int *)p = rd.floor_col;
-			rd.y++;
-		}
-
-		// Point d’impact du rayon (utile pour la minimap / debug)
-		rd.hitX = raycast.posX + raycast.rayDirX * rd.finalDist;
-		rd.hitY = raycast.posY + raycast.rayDirY * rd.finalDist;
-
-		// Trace le rayon sur la minimap (échelle *10)
-		draw_line(
-			rd.addr,
-			(int)(raycast.posX * data->scale + 1.5), (int)(raycast.posY * data->scale),
-			(int)(rd.hitX * data->scale),               (int)(rd.hitY * data->scale),
-			0x00FFFF00, rd.bpp, rd.line_len
-		);
-
-		rd.x++;
+		init_tex_and_draw(&raycast, &rd, tex, data);
+		draw_wall(&rd, data, tex);
+		draw_floor_and_put_screen(&rd, &raycast, data);
 	}
 	data->raycast.door = -1;
-
-	// Dessine la minimap par-dessus
 	minimap(data, rd.addr, rd.bpp, rd.line_len);
-
-	// Affiche le buffer à l’écran
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, rd.img, 0, 0);
 	mlx_destroy_image(data->mlx.mlx, rd.img);
 	return (0);
