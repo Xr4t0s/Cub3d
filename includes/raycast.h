@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:56:10 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 01:28:10 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:17:54 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,27 @@ typedef struct s_data	t_data;
 
 typedef struct s_raycast
 {
-	int		mapX;
-	int		mapY;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
 	int		door;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwall_dist;
 }	t_raycast;
 
 typedef struct s_raydata
@@ -53,20 +50,20 @@ typedef struct s_raydata
 	int				x;
 	int				y;
 	int				hit;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
-	int				texX;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
 	void			*img;
 	char			*addr;
 	float			distance_travelled;
-	float			finalDist;
-	double			hitX;
-	double			hitY;
+	float			final_dist;
+	double			hitx;
+	double			hity;
 	double			dist;
-	double			wallX;
+	double			wallx;
 	double			step;
-	double			texPos;
+	double			tex_pos;
 	unsigned int	ceil_col;
 	unsigned int	floor_col;
 }	t_raydata;
@@ -104,7 +101,7 @@ void			check_side2(t_raydata *rd, t_raycast *raycast,
 					t_data *data, t_direction **tex);
 void			init_tex_and_draw(t_raycast *raycast,
 					t_raydata *rd, t_direction *tex, t_data *d);
-void			draw_wall(t_raydata *rd, t_data *data, t_direction *tex);
+void			draw_wall(t_raydata *rd, t_direction *tex);
 void			draw_floor_and_put_screen(t_raydata *rd,
 					t_raycast *raycast, t_data *data);
 void			all_checks(t_raycast *raycast, t_raydata *rd,

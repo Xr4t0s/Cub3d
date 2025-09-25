@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 23:17:57 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/24 23:28:06 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:16:35 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ int	go_up(t_data *d)
 	t_tmpvar	tmp;
 
 	tmp.ny = sin(d->player.angle) * d->player.move_speed;
-	tmp.yP1 = d->player.yP + tmp.ny;
-	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.yp1 = d->player.yp + tmp.ny;
+	tmp.first = d->map.map[tmp.yp1 / d->scale][(int)d->player.xp / d->scale];
 	if (!check_angle(d))
 		return (0);
 	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		d->player.yP += sin(d->player.angle) * d->player.move_speed;
-		d->player.y = d->player.yP / d->scale;
+		d->player.yp += sin(d->player.angle) * d->player.move_speed;
+		d->player.y = d->player.yp / d->scale;
 	}
 	tmp.nx = cos(d->player.angle) * d->player.move_speed;
-	tmp.xP1 = d->player.xP + tmp.nx;
-	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	tmp.xp1 = d->player.xp + tmp.nx;
+	tmp.secnd = d->map.map[(int)d->player.yp / d->scale][tmp.xp1 / d->scale];
 	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		d->player.xP += cos(d->player.angle) * d->player.move_speed;
-		d->player.x = d->player.xP / d->scale;
+		d->player.xp += cos(d->player.angle) * d->player.move_speed;
+		d->player.x = d->player.xp / d->scale;
 	}
 	return (1);
 }
@@ -43,22 +43,22 @@ int	go_down(t_data *d)
 	t_tmpvar	tmp;
 
 	tmp.ny = sin(d->player.angle) * d->player.move_speed;
-	tmp.yP1 = d->player.yP - tmp.ny;
-	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.yp1 = d->player.yp - tmp.ny;
+	tmp.first = d->map.map[tmp.yp1 / d->scale][(int)d->player.xp / d->scale];
 	if (!check_angle(d))
 		return (0);
 	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		d->player.yP -= sin(d->player.angle) * d->player.move_speed;
-		d->player.y = d->player.yP / d->scale;
+		d->player.yp -= sin(d->player.angle) * d->player.move_speed;
+		d->player.y = d->player.yp / d->scale;
 	}
 	tmp.nx = cos(d->player.angle) * d->player.move_speed;
-	tmp.xP1 = d->player.xP - tmp.nx;
-	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	tmp.xp1 = d->player.xp - tmp.nx;
+	tmp.secnd = d->map.map[(int)d->player.yp / d->scale][tmp.xp1 / d->scale];
 	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		d->player.xP -= cos(d->player.angle) * d->player.move_speed;
-		d->player.x = d->player.xP / d->scale;
+		d->player.xp -= cos(d->player.angle) * d->player.move_speed;
+		d->player.x = d->player.xp / d->scale;
 	}
 	return (1);
 }
@@ -69,22 +69,22 @@ int	go_left(t_data *d)
 
 	tmp.a = d->player.angle;
 	tmp.ny = -cos(tmp.a) * (d->player.move_speed / 1.5);
-	tmp.yP1 = d->player.yP + tmp.ny;
-	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.yp1 = d->player.yp + tmp.ny;
+	tmp.first = d->map.map[tmp.yp1 / d->scale][(int)d->player.xp / d->scale];
 	if (!check_angle(d))
 		return (0);
 	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		d->player.yP += -cos(tmp.a) * (d->player.move_speed / 1.5);
-		d->player.y = d->player.yP / d->scale;
+		d->player.yp += -cos(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.y = d->player.yp / d->scale;
 	}
 	tmp.nx = sin(tmp.a) * (d->player.move_speed / 1.5);
-	tmp.xP1 = d->player.xP + tmp.nx;
-	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	tmp.xp1 = d->player.xp + tmp.nx;
+	tmp.secnd = d->map.map[(int)d->player.yp / d->scale][tmp.xp1 / d->scale];
 	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		d->player.xP += sin(tmp.a) * (d->player.move_speed / 1.5);
-		d->player.x = d->player.xP / d->scale;
+		d->player.xp += sin(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.x = d->player.xp / d->scale;
 	}
 	return (1);
 }
@@ -95,22 +95,22 @@ int	go_right(t_data *d)
 
 	tmp.a = d->player.angle;
 	tmp.ny = cos(tmp.a) * (d->player.move_speed / 1.5);
-	tmp.yP1 = d->player.yP + tmp.ny;
-	tmp.first = d->map.map[tmp.yP1 / d->scale][(int)d->player.xP / d->scale];
+	tmp.yp1 = d->player.yp + tmp.ny;
+	tmp.first = d->map.map[tmp.yp1 / d->scale][(int)d->player.xp / d->scale];
 	if (!check_angle(d))
 		return (0);
 	if (tmp.first != '1' && tmp.first != 'D')
 	{
-		d->player.yP += cos(tmp.a) * (d->player.move_speed / 1.5);
-		d->player.y = d->player.yP / d->scale;
+		d->player.yp += cos(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.y = d->player.yp / d->scale;
 	}
 	tmp.nx = -sin(tmp.a) * (d->player.move_speed / 1.5);
-	tmp.xP1 = d->player.xP + tmp.nx;
-	tmp.secnd = d->map.map[(int)d->player.yP / d->scale][tmp.xP1 / d->scale];
+	tmp.xp1 = d->player.xp + tmp.nx;
+	tmp.secnd = d->map.map[(int)d->player.yp / d->scale][tmp.xp1 / d->scale];
 	if (tmp.secnd != '1' && tmp.secnd != 'D')
 	{
-		d->player.xP += -sin(tmp.a) * (d->player.move_speed / 1.5);
-		d->player.x = d->player.xP / d->scale;
+		d->player.xp += -sin(tmp.a) * (d->player.move_speed / 1.5);
+		d->player.x = d->player.xp / d->scale;
 	}
 	return (1);
 }

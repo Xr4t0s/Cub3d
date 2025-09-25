@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:52:08 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 22:06:45 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:53:41 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static int	loop(t_normalize *tmp, t_data *d)
 		if (tmp->count > 1)
 			return (tmp->copy[tmp->i + 1] = NULL, ft_free_split(tmp->copy), 0);
 		d->player.x = tmp->j;
-		d->player.xP = d->player.x * d->scale + 4;
+		d->player.xp = d->player.x * d->scale + 4;
 		d->player.y = tmp->i;
-		d->player.yP = d->player.y * d->scale + 4;
+		d->player.yp = d->player.y * d->scale + 4;
 		if (d->map.map[tmp->i][tmp->j] == 'S')
 			d->player.angle = 1.57;
 		if (d->map.map[tmp->i][tmp->j] == 'E')

@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 21:24:37 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:17:28 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ static void	parse_param_utils(t_data *d, char *trimed, char **param)
 static void	parse_param(t_data *d, char *line)
 {
 	char	**param;
-	char	**fc;
 	char	*trimed;
 
 	param = NULL;
-	fc = NULL;
 	trimed = NULL;
 	if (!line)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 18:02:45 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/24 23:29:39 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:53:21 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	init_angle_data(t_tmp_angle *tmp, t_data *data)
 {
-	tmp->x = data->player.xP;
-	tmp->y = data->player.yP;
+	tmp->x = data->player.xp;
+	tmp->y = data->player.yp;
 	tmp->angle = data->player.angle;
 	tmp->xtestpos = data->map.map[(int)tmp->y / data->scale]
 	[(int)(tmp->x + 1) / data->scale];

@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:15:14 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 20:31:23 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:50:57 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	init_map(t_map *map)
 void	init_player(t_player *player)
 {
 	player->x = 0;
-	player->xP = 0;
+	player->xp = 0;
 	player->y = 0;
-	player->yP = 0;
+	player->yp = 0;
 	player->angle = 2.355;
 	player->fov = 1.1519;
 	player->fov_rot = 0.05;

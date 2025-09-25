@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 22:46:34 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/23 21:29:13 by engiacom         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:54:22 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	draw_player(t_minivar *mini, t_data *data)
 		{
 			mini->color = 0xFF0000;
 			minimap_draw_pixel(mini,
-				data->player.xP + mini->px,
-				data->player.yP + mini->py,
+				data->player.xp + mini->px,
+				data->player.yp + mini->py,
 				data);
 			mini->px++;
 		}

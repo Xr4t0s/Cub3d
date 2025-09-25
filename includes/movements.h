@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:38:55 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 00:55:39 by engiacom         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:16:08 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ typedef struct s_tmpvar
 	char	first;
 	char	secnd;
 	double	ny;
-	int		yP1;
+	int		yp1;
 	double	nx;
-	int		xP1;
+	int		xp1;
 }	t_tmpvar;
 
 typedef struct s_tmp_angle

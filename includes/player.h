@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 06:38:38 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 00:59:49 by engiacom         ###   ########.fr       */
+/*   Updated: 2025/09/25 12:51:05 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
-	double	xP;
-	double	yP;
+	double	xp;
+	double	yp;
 	double	angle;
 	double	fov;
 	double	fov_rot;

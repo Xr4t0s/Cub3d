@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 22:07:44 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 00:52:22 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:13:03 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	init_draw(t_raycast *raycast, t_data *data,
 	t_raydata *rd, t_draw *draw)
 {
-	draw->x0 = (int)(raycast->posX * data->scale + 1.5);
-	draw->y0 = (int)(raycast->posY * data->scale);
-	draw->x1 = (int)(rd->hitX * data->scale);
-	draw->y1 = (int)(rd->hitY * data->scale);
+	draw->x0 = (int)(raycast->pos_x * data->scale + 1.5);
+	draw->y0 = (int)(raycast->pos_y * data->scale);
+	draw->x1 = (int)(rd->hitx * data->scale);
+	draw->y1 = (int)(rd->hity * data->scale);
 	draw->color = 0x00FFFF00;
 	draw->dx = abs(draw->x1 - draw->x0);
 	draw->dy = abs(draw->y1 - draw->y0);

@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 00:53:40 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 01:00:16 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:13:04 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 
 void	ray_check(t_raycast *raycast, t_raydata *rd, t_data *data)
 {
-	if (raycast->sideDistX < raycast->sideDistY)
+	if (raycast->sidedist_x < raycast->sidedist_y)
 	{
-		rd->distance_travelled = raycast->sideDistX;
-		raycast->sideDistX += raycast->deltaDistX;
-		raycast->mapX += raycast->stepX;
+		rd->distance_travelled = raycast->sidedist_x;
+		raycast->sidedist_x += raycast->deltadist_x;
+		raycast->map_x += raycast->step_x;
 		raycast->side = 0;
 	}
 	else
 	{
-		rd->distance_travelled = raycast->sideDistY;
-		raycast->sideDistY += raycast->deltaDistY;
-		raycast->mapY += raycast->stepY;
+		rd->distance_travelled = raycast->sidedist_y;
+		raycast->sidedist_y += raycast->deltadist_y;
+		raycast->map_y += raycast->step_y;
 		raycast->side = 2;
 	}
-	if (data->map.map[raycast->mapY][raycast->mapX] == '1'
-		|| data->map.map[raycast->mapY][raycast->mapX] == 'D')
+	if (data->map.map[raycast->map_y][raycast->map_x] == '1'
+		|| data->map.map[raycast->map_y][raycast->map_x] == 'D')
 		rd->hit = 1;
 }
 
 void	ray_check2(t_raycast *raycast, t_raydata *rd, t_data *data)
 {
-	if (data->map.map[raycast->mapY][raycast->mapX] == 'D'
-		&& data->raycast.door > 0 && (fabs(raycast->sideDistX) <= 2
-		|| fabs(raycast->sideDistY) <= 2) && raycast->cameraX >= -0.30
-		&& raycast->cameraX <= 0.30)
+	if (data->map.map[raycast->map_y][raycast->map_x] == 'D'
+		&& data->raycast.door > 0 && (fabs(raycast->sidedist_x) <= 2
+		|| fabs(raycast->sidedist_y) <= 2) && raycast->camera_x >= -0.30
+		&& raycast->camera_x <= 0.30)
 	{
-		data->map.map[raycast->mapY][raycast->mapX] = '*';
+		data->map.map[raycast->map_y][raycast->map_x] = '*';
 		data->raycast.door *= -1;
 		rd->hit = 0;
 	}
-	else if (data->map.map[raycast->mapY][raycast->mapX] == '*'
-		&& data->raycast.door > 0 && (fabs(raycast->sideDistX) <= 2
-		|| fabs(raycast->sideDistY) <= 2) && raycast->cameraX >= -0.30
-		&& raycast->cameraX <= 0.30)
+	else if (data->map.map[raycast->map_y][raycast->map_x] == '*'
+		&& data->raycast.door > 0 && (fabs(raycast->sidedist_x) <= 2
+		|| fabs(raycast->sidedist_y) <= 2) && raycast->camera_x >= -0.30
+		&& raycast->camera_x <= 0.30)
 	{
-		data->map.map[raycast->mapY][raycast->mapX] = 'D';
+		data->map.map[raycast->map_y][raycast->map_x] = 'D';
 		data->raycast.door *= -1;
 		rd->hit = 1;
 	}
@@ -59,39 +59,39 @@ void	ray_check3(t_raycast *raycast)
 {
 	if (raycast->side == 2)
 	{
-		if (raycast->posY > raycast->mapY)
+		if (raycast->pos_y > raycast->map_y)
 			raycast->side = 3;
 	}
 	else
 	{
-		if (raycast->posX > raycast->mapX)
+		if (raycast->pos_x > raycast->map_x)
 			raycast->side = 1;
 	}
 }
 
 void	check_side(t_raydata *rd, t_raycast *raycast)
 {
-	rd->hitX = raycast->posX + raycast->sideDistX * raycast->rayDirX;
-	rd->hitY = raycast->posY + raycast->sideDistY * raycast->rayDirY;
+	rd->hitx = raycast->pos_x + raycast->sidedist_x * raycast->raydir_x;
+	rd->hity = raycast->pos_y + raycast->sidedist_y * raycast->raydir_y;
 	if (rd->hit)
 	{
 		if (raycast->side <= 1)
 		{
-			raycast->perpWallDist = (raycast->mapX - raycast->posX
-					+ (1 - raycast->stepX) / 2.0) / raycast->rayDirX;
+			raycast->perpwall_dist = (raycast->map_x - raycast->pos_x
+					+ (1 - raycast->step_x) / 2.0) / raycast->raydir_x;
 		}
 		else
 		{
-			raycast->perpWallDist = (raycast->mapY - raycast->posY
-					+ (1 - raycast->stepY) / 2.0) / raycast->rayDirY;
+			raycast->perpwall_dist = (raycast->map_y - raycast->pos_y
+					+ (1 - raycast->step_y) / 2.0) / raycast->raydir_y;
 		}
-		if (raycast->perpWallDist < MAX_DIST)
-			rd->finalDist = raycast->perpWallDist;
+		if (raycast->perpwall_dist < MAX_DIST)
+			rd->final_dist = raycast->perpwall_dist;
 		else
-			rd->finalDist = MAX_DIST;
+			rd->final_dist = MAX_DIST;
 	}
 	else
 	{
-		rd->finalDist = MAX_DIST;
+		rd->final_dist = MAX_DIST;
 	}
 }
