@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:04:33 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 21:53:55 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:19:18 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ void	handle_we_ea(t_data *d, char *trimed, int target)
 				&ea->width, &ea->height);
 		ea->addr = mlx_get_data_addr(ea->img, &ea->bpp,
 				&ea->line_len, &ea->endian);
-		printf("bpp = %d\n", ea->bpp);
 	}
 }
