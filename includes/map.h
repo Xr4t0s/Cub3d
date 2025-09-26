@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 00:52:53 by engiacom         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:56:05 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void	establish_map_size(t_data *d);
 int		check_data(t_data *d, char *filename);
 int		check_map_data(t_data d);
 int		check_param(t_data d);
+int		check_img(char *filename, t_data *d);
 
 #endif

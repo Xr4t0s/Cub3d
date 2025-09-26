@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 13:17:28 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:55:46 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	parse_param_utils(t_data *d, char *trimed, char **param)
 {
-	if (!ft_strncmp(param[0], "NO", 2))
+	if (!ft_strncmp(param[0], "NO", 2) && check_img(trimed, d))
 		handle_no_so(d, trimed, 1);
-	else if (!ft_strncmp(param[0], "SO", 2))
+	else if (!ft_strncmp(param[0], "SO", 2) && check_img(trimed, d))
 		handle_no_so(d, trimed, 2);
-	else if (!ft_strncmp(param[0], "WE", 2))
+	else if (!ft_strncmp(param[0], "WE", 2) && check_img(trimed, d))
 		handle_we_ea(d, trimed, 1);
-	else if (!ft_strncmp(param[0], "EA", 2))
+	else if (!ft_strncmp(param[0], "EA", 2) && check_img(trimed, d))
 		handle_we_ea(d, trimed, 2);
 	fulfill_fc(param, d);
 }

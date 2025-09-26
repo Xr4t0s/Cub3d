@@ -6,11 +6,24 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:56:16 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/23 20:30:41 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:55:52 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	check_img(char *filename, t_data *d)
+{
+	void	*img;
+	int		x;
+	int		y;
+
+	img = NULL;
+	img = mlx_xpm_file_to_image(d->mlx.mlx, filename, &x, &y);
+	if (!img)
+		return (0);
+	return (mlx_destroy_image(d->mlx.mlx, img), 1);
+}
 
 int	fulfill_fc(char **param, t_data *d)
 {
