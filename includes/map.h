@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 01:15:12 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:13:48 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_map
 	int			height;
 	t_textures	textures;
 }	t_map;
+
+typedef struct s_rm_char
+{
+	int		i;
+	int		x;
+	int		mark;
+	char	*ret;
+}	t_rm_char;
 
 // PARSING
 int		parse_file(t_data *d, char *filename);

@@ -6,13 +6,13 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 00:31:11 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 02:03:41 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:16:04 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cube3d.h"
+#include "cube3d.h"
 
-char	*ft_strchr1(const char *s, int c)
+static char	*ft_strchr1(const char *s, int c)
 {
 	int	i;
 	int	limit;
@@ -28,41 +28,43 @@ char	*ft_strchr1(const char *s, int c)
 	return (0);
 }
 
-char	*ft_rm_char(char *str, char *ch)
+static void	loop_rm_char(t_rm_char *rm, char *str, char *ch)
 {
-	int		i;
-	int		x;
-	char	*ret;
-	int mark;
-	
-	mark = 1;
-	i = 0;
-	x = 0;
-	if (!str || !ch)
-		return (NULL);
-	ret = calloc(8, ft_strlen(str) + 1);
-	if (!ret)
-		return (NULL);
-	while (str[i] && ft_strchr1(ch, str[i]))
-		i++;
-	while (str[i])
+	while (str[rm->i])
 	{
-		if (!ft_strchr1(ch, str[i]))
-			ret[x++] = str[i];
+		if (!ft_strchr1(ch, str[rm->i]))
+			rm->ret[rm->x++] = str[rm->i];
 		else
 		{
-			if (mark == 1)
+			if (rm->mark == 1)
 			{
-				ret[x++] = ';';
-				mark = 0;
+				rm->ret[rm->x++] = ';';
+				rm->mark = 0;
 			}
-			while (str[i] && ft_strchr1(ch, str[i]))
-				i++;
+			while (str[rm->i] && ft_strchr1(ch, str[rm->i]))
+				rm->i++;
 			continue ;
-		}	
-		i++;
+		}
+		rm->i++;
 	}
-	ret[x] = 0;
+}
+
+char	*ft_rm_char(char *str, char *ch)
+{
+	t_rm_char	rm;
+
+	rm.mark = 1;
+	rm.i = 0;
+	rm.x = 0;
+	if (!str || !ch)
+		return (NULL);
+	rm.ret = calloc(8, ft_strlen(str) + 1);
+	if (!rm.ret)
+		return (NULL);
+	while (str[rm.i] && ft_strchr1(ch, str[rm.i]))
+		rm.i++;
+	loop_rm_char(&rm, str, ch);
+	rm.ret[rm.x] = 0;
 	free(str);
-	return (ret);
+	return (rm.ret);
 }

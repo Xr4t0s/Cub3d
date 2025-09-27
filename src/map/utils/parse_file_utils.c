@@ -6,19 +6,18 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:56:16 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 02:13:25 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:25:35 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int check_ascii(char *s)
+int	check_ascii(char *s)
 {
 	int	i;
-	int mark;
+	int	mark;
 
 	mark = 1;
-
 	i = 0;
 	while (ft_isdigit(s[i]) || (!ft_strncmp(&s[i], ",", 1) && mark == 0))
 	{
@@ -49,6 +48,8 @@ int	fulfill_fc(char **param, t_data *d)
 {
 	char	**fc;
 
+	if (param[0] && ft_strlen(param[0]) != 1)
+		return (0);
 	if (!ft_strncmp(param[0], "C", 1) && check_ascii(param[1]))
 	{
 		fc = ft_split(param[1], ',');

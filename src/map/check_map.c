@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 06:54:02 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/26 23:08:00 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 16:19:39 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ int	check_map_data(t_data d)
 	copy = ft_tabdup(d.map.map);
 	if (!copy)
 		return (printf("Failed to duplicate the map for checking\n"), 0);
-	// if (!check_if_others_char(&d.map))
-	// 	return (0);
 	if (!check_map_wall(copy))
 		return (ft_free_split(copy), 0);
 	if (!flood_check(copy, d.player.y, d.player.x))
