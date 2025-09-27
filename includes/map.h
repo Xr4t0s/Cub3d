@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 20:56:05 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 01:15:12 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	handle_no_so(t_data *d, char *trimed, int target);
 void	handle_we_ea(t_data *d, char *trimed, int target);
 int		fulfill_fc(char **param, t_data *d);
 void	establish_map_size(t_data *d);
+int		check_if_others_char(t_map *map);
+char	*ft_rm_char(char *str, char *ch);
 
 // CHECK FUNCTIONS
 int		check_data(t_data *d, char *filename);

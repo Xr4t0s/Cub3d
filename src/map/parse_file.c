@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 20:55:46 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 01:55:53 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	parse_param(t_data *d, char *line)
 	trimed = NULL;
 	if (!line)
 		return ;
-	param = ft_split(line, 32);
-	if (!param)
+	line = ft_rm_char(line, " \t\n");
+	param = ft_split(line, ';');
+	printf("%s\n", line);
+	if (!param || param[2])
 		return ;
 	if (param[1])
 		trimed = remove_spaces(param[1]);
@@ -69,7 +71,7 @@ static int	parse_file_init(t_parsing *tmp, t_data *d, char *filename)
 	tmp->trimed = NULL;
 	d->map.fd_file = open(filename, O_RDONLY);
 	if (d->map.fd_file == -1)
-		return (0);
+		return (free(d->map.map), d->map.map = NULL, 0);
 	tmp->line = get_next_line(d->map.fd_file);
 	if (!tmp->line)
 		return (0);

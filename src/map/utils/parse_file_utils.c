@@ -6,11 +6,31 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:56:16 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 20:55:52 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 02:13:25 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int check_ascii(char *s)
+{
+	int	i;
+	int mark;
+
+	mark = 1;
+
+	i = 0;
+	while (ft_isdigit(s[i]) || (!ft_strncmp(&s[i], ",", 1) && mark == 0))
+	{
+		mark = 0;
+		if (!ft_strncmp(&s[i], ",", 1))
+			mark = 1;
+		i++;
+	}
+	if (s[i])
+		return (0);
+	return (1);
+}
 
 int	check_img(char *filename, t_data *d)
 {
@@ -29,7 +49,7 @@ int	fulfill_fc(char **param, t_data *d)
 {
 	char	**fc;
 
-	if (!ft_strncmp(param[0], "C", 1))
+	if (!ft_strncmp(param[0], "C", 1) && check_ascii(param[1]))
 	{
 		fc = ft_split(param[1], ',');
 		if (!fc || (!fc[0] || !fc[1] || !fc[2]))
@@ -39,7 +59,7 @@ int	fulfill_fc(char **param, t_data *d)
 		d->map.textures.fc[0][2] = ft_atoi(fc[2]);
 		ft_free_split(fc);
 	}
-	if (!ft_strncmp(param[0], "F", 1))
+	if (!ft_strncmp(param[0], "F", 1) && check_ascii(param[1]))
 	{
 		fc = ft_split(param[1], ',');
 		if (!fc || (!fc[0] || !fc[1] || !fc[2]))

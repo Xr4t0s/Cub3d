@@ -6,11 +6,23 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:15:14 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 12:50:57 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:47:53 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	init_textures(t_map *map)
+{
+	map->textures.no.img = NULL;
+	map->textures.so.img = NULL;
+	map->textures.we.img = NULL;
+	map->textures.ea.img = NULL;
+	map->textures.no.addr = NULL;
+	map->textures.so.addr = NULL;
+	map->textures.we.addr = NULL;
+	map->textures.ea.addr = NULL;
+}
 
 void	init_map(t_map *map)
 {
@@ -20,15 +32,12 @@ void	init_map(t_map *map)
 	i = 0;
 	j = 0;
 	map->fd_file = 0;
-	map->map = malloc(sizeof(char *) * 1000);
+	map->map = ft_calloc(8, 1000);
 	if (!map->map)
 		return ;
 	map->width = 0;
 	map->height = 0;
-	map->textures.no.img = NULL;
-	map->textures.so.img = NULL;
-	map->textures.we.img = NULL;
-	map->textures.ea.img = NULL;
+	init_textures(map);
 	while (j < 2)
 	{
 		while (i < 3)
@@ -54,7 +63,7 @@ void	init_player(t_player *player)
 	player->move_speed = 1.5;
 }
 
-void	init_move(t_move *move)
+void	init_move(t_move *move, t_mouse *mouse)
 {
 	move->w = 0;
 	move->a = 0;
@@ -63,10 +72,6 @@ void	init_move(t_move *move)
 	move->l = 0;
 	move->r = 0;
 	move->m = -1;
-}
-
-void	init_mouse(t_mouse *mouse)
-{
 	mouse->prev_x = 0;
 }
 
@@ -76,8 +81,7 @@ void	init(t_data *data)
 	data->mlx.height = 1440;
 	init_map(&data->map);
 	init_player(&data->player);
-	init_move(&data->move);
-	init_mouse(&data->mouse);
+	init_move(&data->move, &data->mouse);
 	data->raycast.door = -1;
 	if (data->mlx.height > 1080)
 		data->scale = 10;

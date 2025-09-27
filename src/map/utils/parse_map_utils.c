@@ -6,11 +6,40 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:04:33 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 20:43:15 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/27 00:01:11 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	check_if_others_char(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map->map[i])
+	{
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] != '0'
+			&& map->map[i][j] != '1'
+			&& map->map[i][j] != 'D'
+			&& map->map[i][j] != 'S'
+			&& map->map[i][j] != 'N'
+			&& map->map[i][j] != 'W'
+			&& map->map[i][j] != '\t'
+			&& map->map[i][j] != ' '
+			&& map->map[i][j] != 'E')
+				return (0);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (1);
+}
 
 char	*remove_spaces(char *line)
 {

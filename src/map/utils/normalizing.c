@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:52:08 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 12:53:41 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:55:36 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static int	init_normalization(t_normalize *tmp, t_data *d, int index)
 	d->map.map[index] = NULL;
 	establish_map_size(d);
 	tmp->count = 0;
-	tmp->copy = malloc(sizeof(char *) * (d->map.height + 1));
+	tmp->copy = ft_calloc(8, d->map.height + 1);
 	if (!tmp->copy)
 		return (0);
 	tmp->i = 0;
+	if (!check_if_others_char(&d->map))
+		return (0);
 	return (1);
 }
 
@@ -70,7 +72,7 @@ int	normalize_map(t_data *d, int index)
 	t_normalize	tmp;
 
 	if (!init_normalization(&tmp, d, index))
-		return (0);
+		return (ft_free_split(tmp.copy), 0);
 	while (d->map.map[tmp.i])
 	{
 		if (!init_loop(&tmp, d))
