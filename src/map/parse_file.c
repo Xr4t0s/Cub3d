@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/28 21:53:59 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:41:50 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,28 @@
 static void	parse_param_utils(t_data *d, char *trimed, char **param)
 {
 	if (!ft_strncmp(param[0], "NO", 2) && ft_strlen(param[0]) == 2
-		&& check_img(trimed, d))
+		&& check_img(trimed, d) && !d->map.textures.no.img)
 		handle_no_so(d, trimed, 1);
 	else if (!ft_strncmp(param[0], "SO", 2) && ft_strlen(param[0]) == 2
-		&& check_img(trimed, d))
+		&& check_img(trimed, d) && !d->map.textures.so.img)
 		handle_no_so(d, trimed, 2);
 	else if (!ft_strncmp(param[0], "WE", 2) && ft_strlen(param[0]) == 2
-		&& check_img(trimed, d))
+		&& check_img(trimed, d) && !d->map.textures.we.img)
 		handle_we_ea(d, trimed, 1);
 	else if (!ft_strncmp(param[0], "EA", 2) && ft_strlen(param[0]) == 2
-		&& check_img(trimed, d))
+		&& check_img(trimed, d) && !d->map.textures.ea.img)
 		handle_we_ea(d, trimed, 2);
-	fulfill_fc(param, d);
+	else if (ft_strlen(param[0]) == 1
+		&& (!ft_strncmp(param[0], "F", 1) || !ft_strncmp(param[0], "C", 1)))
+	{
+		if (!ft_strncmp(param[0], "C", 1) && d->map.textures.fc[0][0] != -1)
+			ft_exit("Key not valid", d, 1, 1);
+		if (!ft_strncmp(param[0], "F", 1) && d->map.textures.fc[1][0] != -1)
+			ft_exit("Key not valid", d, 1, 1);
+		fulfill_fc(param, d);
+	}
+	else
+		ft_exit("Key not valid", d, 1, 1);
 }
 
 static void	parse_param(t_data *d, char *line)
@@ -104,8 +114,8 @@ int	parse_file(t_data *d, char *filename)
 		t.line = get_next_line(d->map.fd_file);
 	}
 	if (!loop_parse_file(&t, d))
-		return (0);	
-	if (!normalize_map(d, t.i))
 		return (0);
+	if (!normalize_map(d, t.i))
+		ft_exit("Failed to parse map", d, 1, 0);
 	return (free(t.line), 1);
 }

@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 00:17:11 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/28 21:29:39 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 22:28:06 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	init_ray(t_raydata *rd, t_data *data)
 {
+	mlx_hook(data->mlx.win, 17, 0, close_window, data);
 	handle_keypress(0, data);
 	if (rd->img == NULL)
 	{

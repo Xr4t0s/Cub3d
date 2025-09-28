@@ -6,11 +6,19 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 00:54:39 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/28 21:29:14 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:42:11 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	close_window(void *data)
+{
+	t_data	*d;
+
+	d = (t_data *)data;
+	return (free_all(d, 1), exit(0), 1);
+}
 
 int	handle_mouse(int x, int y, t_data *data)
 {

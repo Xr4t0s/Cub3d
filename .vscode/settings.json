@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"cub3d.h": "c",
+		"init.h": "c",
+		"get_next_line_bonus.h": "c",
+		"movements.h": "c"
+	}
+}

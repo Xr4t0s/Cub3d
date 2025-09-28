@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:16:22 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/28 21:27:39 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 22:29:47 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ typedef struct s_data
 	t_minivar	minivar;
 	int			scale;
 }	t_data;
+
+int	ft_exit(char *error, t_data *d, int free, int all);
 
 #endif

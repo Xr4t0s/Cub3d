@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:50:56 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/28 21:28:55 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 22:39:47 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	check_xpm(t_data *d)
 int	check_data(t_data *d, char *filename)
 {
 	if (!parse_file(d, filename))
-		return (0);
+		ft_exit("Failed to parse file", d, 1, 0);
 	if (!check_xpm(d))
-		return (0);
+		ft_exit("Failed to parse xpm", d, 1, 0);
 	if (!check_map_data(*d) ||!check_param(*d))
-		return (0);
+		ft_exit("Failed to parse map", d, 1, 0);
 	return (1);
 }

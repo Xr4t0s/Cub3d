@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:38:55 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 13:16:08 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 22:28:22 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int		go_left(t_data *d);
 int		go_up(t_data *d);
 int		go_down(t_data *d);
 void	screen(t_data *data);
+int		close_window(void *data);
 
 #endif

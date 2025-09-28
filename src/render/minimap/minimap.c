@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 22:46:34 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/28 21:29:28 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 23:35:03 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	apply_color(t_minivar *mini, t_data *data)
 		|| map[mini->y][mini->x] == 'N'
 		|| map[mini->y][mini->x] == 'S'
 		|| map[mini->y][mini->x] == 'E'
-		|| map[mini->y][mini->x] == 'W')
+		|| map[mini->y][mini->x] == 'W'
+		|| map[mini->y][mini->x] == '*')
 		mini->color = 0xAAAAAA;
 }
 
