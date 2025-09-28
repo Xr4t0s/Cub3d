@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:41:44 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/23 17:10:22 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:17 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	key_press(int keycode, t_data *data)
 {

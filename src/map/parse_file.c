@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:09:52 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 16:49:07 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:53:59 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static void	parse_param_utils(t_data *d, char *trimed, char **param)
 {
@@ -39,8 +39,12 @@ static void	parse_param(t_data *d, char *line)
 	if (!line)
 		return ;
 	line = ft_rm_char(line, " \t\n");
+	if (!line[0])
+	{
+		free(line);
+		return ;
+	}
 	param = ft_split(line, ';');
-	printf("%s\n", line);
 	if (!param || param[2])
 		return ;
 	if (param[1])
@@ -54,7 +58,7 @@ static void	parse_param(t_data *d, char *line)
 		free(line);
 }
 
-static char	*parse_map(t_data *d, char *line, int *i)
+char	*parse_map(t_data *d, char *line, int *i)
 {
 	char	*trimed;
 
@@ -91,6 +95,7 @@ int	parse_file(t_data *d, char *filename)
 		return (0);
 	while (t.line)
 	{
+		t.i = 0;
 		while (t.line[t.i] == ' ' || t.line[t.i] == '\t')
 			t.i++;
 		if (!t.ft(&t.line[t.i], "1", 1) || !t.ft(&t.line[t.i], "0", 1))
@@ -98,15 +103,8 @@ int	parse_file(t_data *d, char *filename)
 		parse_param(d, t.line);
 		t.line = get_next_line(d->map.fd_file);
 	}
-	t.i = 0;
-	while (t.line && ft_strncmp(t.line, "\n", 1))
-		t.line = parse_map(d, t.line, &t.i);
-	while (t.line)
-	{
-		t.line = parse_map(d, t.line, &t.i);
-		if (t.line && ft_strncmp(t.line, "\n", 1))
-			return (d->map.map[t.i] = NULL, free(t.line), 0);
-	}
+	if (!loop_parse_file(&t, d))
+		return (0);	
 	if (!normalize_map(d, t.i))
 		return (0);
 	return (free(t.line), 1);

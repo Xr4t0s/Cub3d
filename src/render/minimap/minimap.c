@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 22:46:34 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 12:54:22 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:28 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 #include "raycast.h"
 
 static void	init_var(t_minivar *mini, char *addr, int bpp, int line_len)

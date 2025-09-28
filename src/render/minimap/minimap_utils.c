@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:24:56 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/23 21:48:58 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:25 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 #include "raycast.h"
 
 void	minimap_draw_pixel(t_minivar *mini, int x, int y, t_data *data)

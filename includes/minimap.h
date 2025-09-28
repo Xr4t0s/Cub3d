@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: engiacom <engiacom@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 20:51:52 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 00:53:43 by engiacom         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:27:55 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIMAP_H
 # define MINIMAP_H
 
-# include "cube3d.h"
+# include "cub3d.h"
 
 typedef struct s_minivar
 {

@@ -6,13 +6,13 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 06:38:38 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 12:51:05 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:28:10 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
-# include "cube3d.h"
+# include "cub3d.h"
 
 typedef struct s_player
 {

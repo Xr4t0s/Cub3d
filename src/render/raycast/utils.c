@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 22:07:44 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 13:13:03 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:43 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static void	init_draw(t_raycast *raycast, t_data *data,
 	t_raydata *rd, t_draw *draw)

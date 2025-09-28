@@ -6,7 +6,7 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 02:10:57 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 16:13:48 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:54:11 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct s_rm_char
 
 // PARSING
 int		parse_file(t_data *d, char *filename);
+int		loop_parse_file(t_parsing *t, t_data *d);
+char	*parse_map(t_data *d, char *line, int *i);
 char	*remove_spaces(char *line);
 int		normalize_map(t_data *d, int index);
 void	handle_no_so(t_data *d, char *trimed, int target);

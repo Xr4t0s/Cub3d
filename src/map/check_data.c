@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:50:56 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/26 21:51:41 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:28:55 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static int	check_xpm(t_data *d)
 {

@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:15:14 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/26 23:47:53 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:34:48 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	init_textures(t_map *map)
 {
@@ -32,7 +32,7 @@ void	init_map(t_map *map)
 	i = 0;
 	j = 0;
 	map->fd_file = 0;
-	map->map = ft_calloc(8, 1000);
+	map->map = ft_calloc(8, 5000);
 	if (!map->map)
 		return ;
 	map->width = 0;

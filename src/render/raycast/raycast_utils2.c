@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 00:53:40 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 13:13:04 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:36 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	ray_check(t_raycast *raycast, t_raydata *rd, t_data *data)
 {

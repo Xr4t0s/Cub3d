@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 00:54:39 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/25 13:17:12 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:29:14 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	handle_mouse(int x, int y, t_data *data)
 {

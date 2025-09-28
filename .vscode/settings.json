@@ -1,6 +1,6 @@
 {
 	"files.associations": {
-		"cube3d.h": "c",
+		"cub3d.h": "c",
 		"get_next_line.h": "c",
 		"map.h": "c",
 		"init.h": "c",

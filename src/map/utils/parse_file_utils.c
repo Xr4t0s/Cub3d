@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:56:16 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 16:25:35 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:52:50 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	check_ascii(char *s)
 {
@@ -69,6 +69,20 @@ int	fulfill_fc(char **param, t_data *d)
 		d->map.textures.fc[1][1] = ft_atoi(fc[1]);
 		d->map.textures.fc[1][2] = ft_atoi(fc[2]);
 		ft_free_split(fc);
+	}
+	return (1);
+}
+
+int	loop_parse_file(t_parsing *t, t_data *d)
+{
+	t->i = 0;
+	while (t->line && ft_strncmp(t->line, "\n", 1))
+		t->line = parse_map(d, t->line, &t->i);
+	while (t->line)
+	{
+		t->line = parse_map(d, t->line, &t->i);
+		if (t->line && ft_strncmp(t->line, "\n", 1))
+			return (d->map.map[t->i] = NULL, free(t->line), 0);
 	}
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 06:54:02 by nitadros          #+#    #+#             */
-/*   Updated: 2025/09/27 16:19:39 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:28:58 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static int	flood_check(char **map, int i, int j)
 {

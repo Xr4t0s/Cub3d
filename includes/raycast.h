@@ -6,13 +6,13 @@
 /*   By: nitadros <nitadros@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:56:10 by engiacom          #+#    #+#             */
-/*   Updated: 2025/09/25 13:17:54 by nitadros         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:28:13 by nitadros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
-# include "cube3d.h"
+# include "cub3d.h"
 # define MAX_DIST 15.0
 
 typedef struct s_data	t_data;
